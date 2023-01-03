@@ -1,6 +1,8 @@
 # `prost_twirp` Release History
 
-## 0.2.0 NOT RELEASED YET
+## 0.2.0
+
+Released 2023-01-03
 
 * Updated dependencies: prost 0.11, Hyper 1.4, etc.
 
@@ -17,6 +19,10 @@
   <https://github.com/sourcefrog/prost-twirp>.
   
 * Removed `PTReq<T>` type alias: just say `ServiceRequest<T>`.
+
+* Dropped the option to embed some library code in the generated code: it makes
+  no difference to the binary size or build times, and makes the user model
+  more complicated.
   
 ## 0.1.0
 
