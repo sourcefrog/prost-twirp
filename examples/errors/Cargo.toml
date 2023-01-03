@@ -1,21 +1,26 @@
 [package]
-name = "example-errors"
-version = "0.1.0"
-authors = ["Chad Retz <chad.retz@gmail.com>"]
+name = "prost-twirp-example-errors"
+version = "0.2.0-pre"
+authors = ["Martin Pool", "Chad Retz <chad.retz@gmail.com>"]
 build = "build.rs"
+publish = false
+edition = "2021"
 
 [dependencies]
-bytes = "0.4"
-futures = "0.1"
-hyper = "0.11"
-prost = "0.3"
-prost-derive = "0.3"
+bytes = "1.2"
+futures = "0.3"
+hyper = "0.14"
+prost = "0.11"
+prost-derive = "0.11"
 prost-twirp = { path = "../../" }
 serde = "1.0"
 serde_derive = "1.0"
 serde_json = "1.0"
-tokio-core = "0.1"
+
+[dependencies.tokio]
+version = "1.2"
+features = ["macros", "net", "rt", "rt-multi-thread", "sync", "time"]
 
 [build-dependencies]
-prost-build = "0.3"
+prost-build = "0.11"
 prost-twirp = { path = "../../", features = ["service-gen"] }

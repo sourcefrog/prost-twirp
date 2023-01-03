@@ -1,21 +1,32 @@
 [package]
 name = "prost-twirp"
-version = "0.1.0"
-authors = ["Chad Retz <chad.retz@gmail.com>"]
+version = "0.2.0-pre"
+authors = ["Martin Pool", "Chad Retz <chad.retz@gmail.com>"]
 description = "Code generator and library for calling/serving Twirp services in Rust using prost and hyper"
 license = "MIT"
-repository = "https://github.com/cretz/prost-twirp"
+keywords = ["rpc", "protobuf", "async", "hyper", "http"]
+repository = "https://github.com/sourcefrog/prost-twirp"
 documentation = "https://docs.rs/prost-twirp"
 readme = "README.md"
 exclude = ["examples/*"]
+edition = "2021"
 
 [features]
-service-gen = ["prost-build"]
+service-gen = ["prost-build", "dep:quote", "dep:proc-macro2"]
 
 [dependencies]
-futures = "0.1"
-hyper = "0.11"
-prost = "0.3"
+futures = "0.3"
+prost = "0.11"
 serde_json = "1.0"
+prost-build = { version = "0.11", optional = true }
+proc-macro2 = { version = "1.0", optional = true }
+quote = { version = "1.0", optional = true }
 
-prost-build = { version = "0.3", optional = true }
+[dependencies.hyper]
+version = "0.14"
+features = ["client", "server", "http1", "http2", "tcp"]
+
+[workspace]
+members = ["examples/errors", "examples/service-gen"]
+# Exclude these because they demonstrate using diffferent features
+exclude = ["examples/no-service-gen", "examples/service-gen-no-runtime"]
