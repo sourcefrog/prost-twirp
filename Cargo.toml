@@ -29,4 +29,4 @@ features = ["client", "server", "http1", "http2", "tcp"]
 [workspace]
 members = ["examples/errors", "examples/service-gen"]
 # Exclude these because they demonstrate using diffferent features
-exclude = ["examples/no-service-gen", "examples/service-gen-no-runtime"]
+exclude = ["examples/no-service-gen"]

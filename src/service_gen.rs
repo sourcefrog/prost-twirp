@@ -10,9 +10,7 @@ use prost_build::{Method, Service, ServiceGenerator};
 use quote::{format_ident, quote};
 
 #[derive(Default)]
-pub struct TwirpServiceGenerator {
-    pub embed_client: bool,
-}
+pub struct TwirpServiceGenerator {}
 
 impl TwirpServiceGenerator {
     pub fn new() -> TwirpServiceGenerator {
@@ -73,11 +71,7 @@ impl TwirpServiceGenerator {
 
     fn prost_twirp_path(&self) -> proc_macro2::TokenStream {
         let mod_name = format_ident!("prost_twirp");
-        if self.embed_client {
-            quote! { #mod_name }
-        } else {
-            quote! { ::#mod_name }
-        }
+        quote! { ::#mod_name }
     }
 
     fn generate_main_impl(&self, service: &Service, buf: &mut String) {
@@ -214,13 +208,5 @@ impl ServiceGenerator for TwirpServiceGenerator {
         self.generate_server(&service, buf);
     }
 
-    fn finalize(&mut self, buf: &mut String) {
-        if self.embed_client {
-            buf.push_str("\n/// Embedded module from prost_twirp source\n#[allow(dead_code)]\nmod prost_twirp {\n");
-            for line in include_str!("service_run.rs").lines() {
-                buf.push_str(&format!("    {}\n", line));
-            }
-            buf.push_str("\n}\n");
-        }
-    }
+    fn finalize(&mut self, _buf: &mut String) {}
 }

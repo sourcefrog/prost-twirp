@@ -18,8 +18,7 @@ best way to understand the API is to read and experiment with the `examples/`, i
 particular `examples/service-gen`, which is the simplest.
 
 * As a client and/or server code generator along with a supporting runtime library. This is the simplest approach and strongly recommended.
-* As a client and/or server code generator with supporting runtime needs embedded in the generated code
-* As a library of utilities to help with more manual Twirp client/server invocations
+* As a library of utilities to help with more manual Twirp client/server invocations.
 
 ### Generating Code
 
@@ -271,14 +270,6 @@ impl service::Haberdasher for HaberdasherService {
 ```
 
 Metadata in the form of a [serde_json::Value] can be given to a [TwirpError] as well. 
-
-### Embedding the Runtime
-
-Instead of having a runtime dependency on the `prost_twirp` crate, it can be embedded instead. By creating the
-`TwirpServiceGenerator` as a mut variable and setting `embed_client` to true, the entire runtime code (not that big)
-will be put in a `prost_twirp` nested module and referenced in the generated code. This means that `prost-twirp` doesn't
-have to be set in the `[dependencies]` for runtime. However, besides `prost` and `prost-derive` runtime libraries,
-Prost Twirp does still require `serde_json` at runtime for error serialization.
 
 ### Manual Client and Server
 
