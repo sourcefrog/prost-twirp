@@ -179,7 +179,7 @@ impl TwirpServiceGenerator {
                                 #mod_path::ProstTwirpError>> + Send + 'static>> {
                     let static_service = ::std::sync::Arc::clone(&self.0);
                     match req.uri().path() {
-                        #(#match_arms),*
+                        #(#match_arms)*
                         _ => Box::pin(::futures::future::ok(
                             #mod_path::ProstTwirpError::NotFound.into_hyper_response().unwrap()
                         ))
